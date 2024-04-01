@@ -1,9 +1,11 @@
-package org.butramyou.notes;
+package org.butramyou.notes.activites;
 
 import android.os.Bundle;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.butramyou.notes.R;
 
 public class CreateNoteActivity extends AppCompatActivity {
 
