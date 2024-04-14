@@ -2,6 +2,8 @@ package org.butramyou.notes.activites;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -65,11 +67,14 @@ public class CreateNoteActivity extends AppCompatActivity {
         note.setDateTime(dateTimeStr);
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
         executor.execute(() -> {
             NotesDatabase.getNotesDatabase(getApplicationContext()).noteDao().insertNote(note);
-            Intent intent = new Intent();
-            setResult(RESULT_OK, intent);
-            finish();
+            handler.post(() -> {
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
+            });
         });
     }
 }
